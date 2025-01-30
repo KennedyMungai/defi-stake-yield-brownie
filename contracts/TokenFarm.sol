@@ -62,9 +62,13 @@ contract TokenFarm is Ownable {
         getTokenValue(_token);
     }
 
-    function getTokenValue(address _token) public view returns(uint256) {
+    function getTokenValue(address _token) public view returns(uint256, uint256) {
         // PriceFeedAddress
         address priceFeedAddress = tokenPriceFeedMapping[_token];
+        AggregatorV3Interface priceFeed = AggregatorV3Interface(priceFeedAddress);
+        (, int256 price, ,,) =priceFeed.latestRoundData();
+        uint256 decimals = priceFeed.decimals();
+        return (uint256(price), uint256(decimals));
     }
 
     function stakeTokens(uint256 _amount, address _token) public {
