@@ -5,12 +5,6 @@
 		}
 	],
 	"settings": {
-		"cSpell.words": [
-			"chainlink",
-			"IERC",
-			"remappings",
-			"smartcontractkit",
-			"unstake"
-		]
+		"cSpell.words": ["chainlink", "dotenv", "IERC", "remappings", "smartcontractkit", "unstake"]
 	}
 }
