@@ -11,6 +11,9 @@ compiler:
       verify: False
     sepolia:
       verify: True
+      url: https://eth-sepolia.g.alchemy.com/v2/${ALCHEMY_API_KEY}
+      dai_usd_price_feed: "0x14866185B1962B63C3Ea9E03Bc1da838bab34C19"
+      eth_usd_price_feed: "0x694AA1769357215DE4FAC081bf1f309aDC325306"
 dotenv: .env
 wallets:
   from_key: ${PRIVATE_KEY}
