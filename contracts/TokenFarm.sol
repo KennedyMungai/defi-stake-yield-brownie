@@ -27,7 +27,7 @@ contract TokenFarm is Ownable {
     // 100 ETH 1:1 for every 1 ETH, we give 1 DappToken
     // 50 ETH and 50 DAI staked, and we want to give a reward of 1 DappToken per 1 DAI
 
-    constructor(address _dappTokenAddress) public {
+    constructor(address _dappTokenAddress) {
         dappToken = IERC20(_dappTokenAddress);
     }
 
@@ -51,6 +51,8 @@ contract TokenFarm is Ownable {
         for(uint256 allowedTokensIndex = 0; allowedTokensIndex < allowedTokens.length; allowedTokensIndex++) {
             totalValue += getUserSingleTokenValue(_user, allowedTokens[allowedTokensIndex]);
         }
+
+        return totalValue;
     }
 
     function getUserSingleTokenValue(address _user, address _token) public view returns(uint256) {
@@ -105,7 +107,7 @@ contract TokenFarm is Ownable {
         allowedTokens.push(_token);
     }
 
-    function tokenIsAllowed(address _token) public returns (bool) {
+    function tokenIsAllowed(address _token) public view returns (bool) {
         for(uint256 allowedTokensIndex=0; allowedTokensIndex < allowedTokens.length; allowedTokensIndex++) {
             if(allowedTokens[allowedTokensIndex] == _token) {
                 return true;
