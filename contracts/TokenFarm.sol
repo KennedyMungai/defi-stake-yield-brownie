@@ -40,7 +40,7 @@ contract TokenFarm is Ownable {
         for(uint256 stakersIndex = 0; stakersIndex < stakers.length; stakersIndex++) {
             address recipient = stakers[stakersIndex];
             uint256 userTotalValue = getUserTotalValue(recipient);
-            // Send them a token reward based on their total value locked
+            dappToken.transfer(recipient, userTotalValue);
         }
     }
 
@@ -49,17 +49,19 @@ contract TokenFarm is Ownable {
         require(uniqueTokensStaked[_user] > 0, "No tokens staked!");
 
         for(uint256 allowedTokensIndex = 0; allowedTokensIndex < allowedTokens.length; allowedTokensIndex++) {
-            totalValue += getUserSingleToken(_user, allowedTokens[allowedTokensIndex]);
+            totalValue += getUserSingleTokenValue(_user, allowedTokens[allowedTokensIndex]);
         }
     }
 
-    function getUserSingleToken(address _user, address _token) public view returns(uint256) {
+    function getUserSingleTokenValue(address _user, address _token) public view returns(uint256) {
         if(uniqueTokensStaked[_user] <= 0) {
             return 0;
         }
 
         // price of the token * stakingBalance[_token][_user]
-        getTokenValue(_token);
+        (uint256 price, uint256 decimals) = getTokenValue(_token);
+
+        return (stakingBalance[_token][_user] * price / decimals);
     }
 
     function getTokenValue(address _token) public view returns(uint256, uint256) {
