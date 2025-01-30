@@ -8,11 +8,11 @@ from scripts.utils import (LOCAL_BLOCKCHAIN_ENVIRONMENTS, get_account,
 
 
 def set_price_feed_contract():
-    # Arrange
     """
     Test that the price feed contract can be set for a given token, and that
     only the owner of the contract can do so.
     """
+    # Arrange
     if network.show_active() not in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
         pytest.skip("Only for local network testing")
 
@@ -44,6 +44,11 @@ def set_price_feed_contract():
 
 
 def test_stake_tokens(amount_staked):
+    """
+    Test that a user can stake tokens to the TokenFarm contract, and that their
+    staking balance is updated, as well as the number of unique tokens they have
+    staked. Also tests that the user is added to the list of stakers.
+    """
     # Arrange
     if network.show_active() not in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
         pytest.skip("Only for local network testing")
@@ -71,8 +76,11 @@ def test_stake_tokens(amount_staked):
     # Assert
     assert (
         token_farm.stakingBalance(
-            dapp_token.address, account.address) == amount_staked
-    )
+            dapp_token.address, account.address)
+    ) == amount_staked
+    assert token_farm.uniqueTokensStaked(account.address) == 1
+    assert token_farm.stakers(0) == account.address
+    return token_farm, dapp_token
 
 
 def test_issue_tokens():
