@@ -19,11 +19,7 @@ BLOCK_CONFIRMATIONS_FOR_VERIFICATION = (
 )
 
 contract_to_mock = {
-    "link_token": LinkToken,
     "eth_usd_price_feed": MockV3Aggregator,
-    "vrf_coordinator": VRFCoordinatorV2Mock,
-    "oracle": MockOracle,
-    "operator": MockOperator,
 }
 
 DECIMALS = 18
