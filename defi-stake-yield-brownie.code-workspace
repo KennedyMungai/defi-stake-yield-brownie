@@ -5,6 +5,12 @@
 		}
 	],
 	"settings": {
-		"cSpell.words": ["chainlink", "IERC", "remappings", "smartcontractkit"]
+		"cSpell.words": [
+			"chainlink",
+			"IERC",
+			"remappings",
+			"smartcontractkit",
+			"unstake"
+		]
 	}
 }
