@@ -41,3 +41,40 @@ def set_price_feed_contract():
                 "from": non_owner
             }
         )
+
+
+def test_stake_tokens(amount_staked):
+    # Arrange
+    if network.show_active() not in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
+        pytest.skip("Only for local network testing")
+
+    account = get_account()
+    token_farm, dapp_token = deploy_token_farm_and_dapp_token()
+
+    # Act
+    dapp_token.approve(
+        token_farm.address,
+        amount_staked,
+        {
+            "from": account
+        }
+    )
+
+    token_farm.stakeTokens(
+        amount_staked,
+        dapp_token.address,
+        {
+            "from": account
+        }
+    )
+
+    # Assert
+    assert (
+        token_farm.stakingBalance(
+            dapp_token.address, account.address) == amount_staked
+    )
+
+
+def test_issue_tokens():
+    # Arrange
+    pass
