@@ -5,6 +5,18 @@
 		}
 	],
 	"settings": {
-		"cSpell.words": ["chainlink", "dotenv", "IERC", "remappings", "smartcontractkit", "unstake"]
+		"cSpell.words": [
+			"chainlink",
+			"dotenv",
+			"funder",
+			"GHKGJD",
+			"IERC",
+			"remappings",
+			"SGSZ",
+			"smartcontractkit",
+			"unstake",
+			"VEYX",
+			"ZRIMA"
+		]
 	}
 }
