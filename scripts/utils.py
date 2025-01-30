@@ -13,6 +13,8 @@ LOCAL_BLOCKCHAIN_ENVIRONMENTS = NON_FORKED_LOCAL_BLOCKCHAIN_ENVIRONMENTS + [
     "matic-fork",
 ]
 
+INITIAL_PRICE_FEED_VALUE = 2000_000_000_000_000_000_000
+
 # Etherscan usually takes a few blocks to register the contract has been deployed
 BLOCK_CONFIRMATIONS_FOR_VERIFICATION = (
     1 if network.show_active() in LOCAL_BLOCKCHAIN_ENVIRONMENTS else 6
@@ -123,7 +125,7 @@ def fund_with_link(
     return tx
 
 
-def deploy_mocks(decimals=DECIMALS, initial_value=INITIAL_VALUE):
+def deploy_mocks(decimals=DECIMALS, initial_value=INITIAL_PRICE_FEED_VALUE):
     """
     Use this script if you want to deploy mocks to a testnet
     """
