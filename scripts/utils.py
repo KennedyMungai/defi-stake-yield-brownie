@@ -142,12 +142,6 @@ def deploy_mocks(decimals=DECIMALS, initial_value=INITIAL_PRICE_FEED_VALUE):
     )
     print(f"Deployed to {mock_vrf_coordinator.address}")
 
-    print("Deploying Mock Operator...")
-    mock_operator = MockOperator.deploy(
-        link_token.address, account, {"from": account})
-    print(f"Deployed to {mock_operator.address}")
-
-    print("Mocks Deployed!")
 
 
 def listen_for_event(brownie_contract, event, timeout=200, poll_interval=2):
