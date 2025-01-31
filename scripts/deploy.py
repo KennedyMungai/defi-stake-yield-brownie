@@ -103,4 +103,4 @@ def main():
     almost all of the DappToken supply to the TokenFarm (so that the owner
     of the TokenFarm has little to no DappTokens)
     """
-    deploy_token_farm_and_dapp_token()
+    deploy_token_farm_and_dapp_token(front_end_update=True)
