@@ -1,4 +1,6 @@
 """The contract deployment script"""
+import json
+import yaml
 from brownie import DappToken, TokenFarm, config, network
 from web3 import Web3
 
@@ -77,6 +79,17 @@ def add_allowed_tokens(token_farm, dict_of_allowed_tokens, account):
         set_tx.wait(1)
 
     return token_farm
+
+
+def update_front_end():
+    """Sending the config information to the frontend"""
+    with open('../brownie-config.yaml', "r", encoding="utf-8") as brownie_config:
+        config_dict = yaml.load(brownie_config, Loader=yaml.FullLoader)
+
+        with open("../front-end/src/brownie-config.json", "w", encoding="utf-8") as brownie_config_json:
+            json.dump(config_dict, brownie_config_json, indent=4)
+
+    print('Frontend updated')
 
 
 def main():
