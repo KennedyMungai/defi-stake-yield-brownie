@@ -9,7 +9,7 @@ from scripts.utils import get_account, get_contract
 KEPT_BALANCE = Web3.toWei(100, "ether")
 
 
-def deploy_token_farm_and_dapp_token(update_front_end=False):
+def deploy_token_farm_and_dapp_token(front_end_update=False):
     """
     Deploys the DappToken and TokenFarm contracts, and transfers most of the DappToken supply to the TokenFarm contract.
     The DappToken contract is deployed with the specified account as the owner.
@@ -49,7 +49,7 @@ def deploy_token_farm_and_dapp_token(update_front_end=False):
         account
     )
 
-    if update_front_end:
+    if front_end_update:
         update_front_end()
 
     return token_farm, dapp_token
