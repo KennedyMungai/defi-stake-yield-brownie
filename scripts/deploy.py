@@ -49,6 +49,8 @@ def deploy_token_farm_and_dapp_token():
         account
     )
 
+    update_front_end()
+
     return token_farm, dapp_token
 
 
