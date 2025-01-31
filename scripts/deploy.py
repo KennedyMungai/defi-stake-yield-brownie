@@ -1,5 +1,8 @@
 """The contract deployment script"""
 import json
+import os
+import shutil
+
 import yaml
 from brownie import DappToken, TokenFarm, config, network
 from web3 import Web3
@@ -86,6 +89,8 @@ def add_allowed_tokens(token_farm, dict_of_allowed_tokens, account):
 
 def update_front_end():
     """Sending the config information to the frontend"""
+    copy_folders_to_front_end("../build", "../front-end/src/chain-info")
+
     with open('../brownie-config.yaml', "r", encoding="utf-8") as brownie_config:
         config_dict = yaml.load(brownie_config, Loader=yaml.FullLoader)
 
@@ -93,6 +98,19 @@ def update_front_end():
             json.dump(config_dict, brownie_config_json, indent=4)
 
     print('Frontend updated')
+
+
+def copy_folders_to_front_end(src, dest):
+    """Copying the build folder to the front-end
+
+    Args:
+        src (str): The source of the build folder
+        dest (str): The destination of the build content
+    """
+    if os.path.exists(dest):
+        shutil.rmtree(dest)
+
+    shutil.copytree(src, dest)
 
 
 def main():
