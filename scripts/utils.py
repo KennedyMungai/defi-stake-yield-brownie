@@ -1,9 +1,8 @@
 """Script containing some utility logic for the deployment script"""
 import time
 
-from brownie import (Contract, LinkToken, MockOperator, MockOracle,
-                     MockV3Aggregator, VRFCoordinatorV2Mock, accounts, config,
-                     network, web3)
+from brownie import (Contract, MockOperator, MockV3Aggregator,
+                     VRFCoordinatorV2Mock, accounts, config, network, web3)
 
 NON_FORKED_LOCAL_BLOCKCHAIN_ENVIRONMENTS = [
     "hardhat", "development", "ganache"]
@@ -132,8 +131,6 @@ def deploy_mocks(decimals=DECIMALS, initial_value=INITIAL_PRICE_FEED_VALUE):
     print(f"The active network is {network.show_active()}")
     print("Deploying Mocks...")
     account = get_account()
-    print("Deploying Mock Link Token...")
-    link_token = LinkToken.deploy({"from": account})
     print("Deploying Mock Price Feed...")
     mock_price_feed = MockV3Aggregator.deploy(
         decimals, initial_value, {"from": account}
@@ -144,10 +141,6 @@ def deploy_mocks(decimals=DECIMALS, initial_value=INITIAL_PRICE_FEED_VALUE):
         BASE_FEE, GAS_PRICE_LINK, {"from": account}
     )
     print(f"Deployed to {mock_vrf_coordinator.address}")
-
-    print("Deploying Mock Oracle...")
-    mock_oracle = MockOracle.deploy(link_token.address, {"from": account})
-    print(f"Deployed to {mock_oracle.address}")
 
     print("Deploying Mock Operator...")
     mock_operator = MockOperator.deploy(
